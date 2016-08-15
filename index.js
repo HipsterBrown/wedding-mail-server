@@ -79,7 +79,8 @@ function sendMail(request, response) {
 function returnServerError(response, error) {
   response.writeHead(500, {
     "Content-Type": "application/json",
-    "Access-Control-Allow-Origin": "*"
+    "Access-Control-Allow-Origin": "*",
+    "Access-Control-Allow-Headers": "Origin, X-Requested-With, Content-Type, Accept"
   });
   response.end(JSON.stringify({
     "error": error,
@@ -90,7 +91,8 @@ function returnServerError(response, error) {
 function returnNotFound(request, response) {
   response.writeHead(404, {
     "Content-Type": "application/json",
-    "Access-Control-Allow-Origin": "*"
+    "Access-Control-Allow-Origin": "*",
+    "Access-Control-Allow-Headers": "Origin, X-Requested-With, Content-Type, Accept"
   });
   response.end(JSON.stringify({
     "message": 'Route not found. Please check your request and try again.'
