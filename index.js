@@ -1,11 +1,10 @@
 // native modules
 var http = require('http');
-var querystring = require('querystring');
 var url = require('url');
 
 // npm modules
 var SparkPost = require('sparkpost');
-var client = new SparkPost(process.env.API_KEY);
+var client = new SparkPost();
 
 var port = process.env.PORT || 8080;
 
@@ -14,7 +13,7 @@ var server = http.createServer((request, response) => {
   var path = url.parse(request.url, true).pathname;
 
   switch (path) {
-    case '/mailer':
+    case '/':
       sendMail(request, response);
       break;
     default:
@@ -49,7 +48,7 @@ function sendMail(request, response) {
           html: `
           <html>
             <body>
-              <h1>Contact from BetterToget-Hehr</h1>
+              <h2>${data.sender}[${data.email}] has sent a message from the Better Toget-Hehr:</h2>
               <p>${data.message}</p>
             </body>
           </html>
